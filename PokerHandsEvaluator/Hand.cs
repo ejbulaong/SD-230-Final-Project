@@ -11,7 +11,6 @@ namespace PokerHandsEvaluator
         public string PlayerName { get; set; }
         public List<Card> Cards { get; set; }
         public Rank Rank { get; set; }
-        public int Value { get; set; }
 
         public Hand()
         {
@@ -23,46 +22,56 @@ namespace PokerHandsEvaluator
             if (IsFiveOfAKind())
             {
                 Rank = new Rank(Ranks.FiveOfAKind);
+                Rank.Value = 9;
             }
             else if (IsStraightFlush())
             {
                 Rank = new Rank(Ranks.StraightFlush);
+                Rank.Value = 8;
             }
             else if (IsFourOfAKind())
             {
                 Rank = new Rank(Ranks.FourOfAKind);
+                Rank.Value = 7;
             }
             else if (IsFullHouse())
             {
                 Rank = new Rank(Ranks.FullHouse);
+                Rank.Value = 6;
             }
             else if (IsFlush())
             {
                 Rank = new Rank(Ranks.Flush);
+                Rank.Value = 5;
             }
             else if (IsStraight())
             {
                 Rank = new Rank(Ranks.Straight);
+                Rank.Value = 4;
             }
             else if (IsThreeOfAKind())
             {
                 Rank = new Rank(Ranks.ThreeOfAKind);
+                Rank.Value = 3;
             }
             else if (IsTwoPair())
             {
                 Rank = new Rank(Ranks.TwoPair);
+                Rank.Value = 2;
             }
             else if (IsOnePair())
             {
                 Rank = new Rank(Ranks.OnePair);
+                Rank.Value = 1;
             }
             else if (IsHighCard())
             {
                 Rank = new Rank(Ranks.HighCard);
+                Rank.Value = 0;
             }
             else
             {
-                throw new Exception("Unhandled Rank");
+                throw new NotImplementedException("Rank not implemented");
             }
         }
 

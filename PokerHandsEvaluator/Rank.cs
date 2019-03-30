@@ -9,7 +9,8 @@ namespace PokerHandsEvaluator
     public class Rank
     {
         public Ranks Name { get; set; }
-        
+        public int Value { get; set; }
+
         public Rank(Ranks name)
         {
             Name = name;

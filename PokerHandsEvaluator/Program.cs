@@ -36,12 +36,13 @@ namespace PokerHandsEvaluator
 
         private static void Evaluate(Deck deck)
         {
-            if(deck.Hands.Count < 1)
+            if (deck.Hands.Count < 1)
             {
                 Console.WriteLine("Sorry. No hand/s to evaluate!");
             }
             else
             {
+                var handValues = new List<int>() { };
                 foreach (var hand in deck.Hands)
                 {
                     var screenOutput = $"{hand.PlayerName} ";
@@ -49,8 +50,22 @@ namespace PokerHandsEvaluator
                     {
                         screenOutput += card.CardName + " ";
                     }
-                    Console.WriteLine(screenOutput + " " + hand.Rank.Name);
+                    handValues.Add(hand.Rank.Value);
+                    Console.WriteLine(screenOutput);
                 }
+
+                var winningHandValue = handValues.Max();
+                var winningHands = (from h in deck.Hands
+                                    where h.Rank.Value == winningHandValue
+                                    select h).ToList();
+
+                Console.WriteLine("Winner/s");
+
+                foreach (var hand in winningHands)
+                {
+                    Console.WriteLine(hand.PlayerName + " "+ hand.Rank.Name);
+                }
+
             }            
         }
 
