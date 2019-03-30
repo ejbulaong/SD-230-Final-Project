@@ -21,7 +21,7 @@ namespace PokerHandsEvaluator
 
         private CardClass GetClassValue()
         {
-            var lastChar = CardName.Substring(CardName.Length-1, 1).ToUpper();
+            var lastChar = CardName.Substring(CardName.Length - 1, 1).ToUpper();
 
             if (lastChar == "C")
             {
@@ -48,14 +48,14 @@ namespace PokerHandsEvaluator
         private int GetCardValue()
         {
             var firstChar = CardName.Substring(0, 1).ToUpper();
-            var cardValues = new List<int>() { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
-            var cardFirstNames = new List<string>() { "A", "K", "Q", "J", "9", "8", "7", "6", "5", "4", "3", "2" };
+            var cardValues = new List<int>() { 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
+            var cardFirstNames = new List<string>() { "A", "K", "Q", "J", "1", "9", "8", "7", "6", "5", "4", "3", "2" };
 
             var cardValue = (from f in cardFirstNames
                              where f == firstChar
                              select f).FirstOrDefault();
 
-            return cardValues[cardFirstNames.IndexOf(cardValue)];           
+            return cardValues[cardFirstNames.IndexOf(cardValue)];
         }
     }
 }

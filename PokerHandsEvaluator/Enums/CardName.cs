@@ -12,6 +12,7 @@ namespace PokerHandsEvaluator
         King,
         Queen,
         Jack,
+        Ten,
         Nine,
         Eigth,
         Seven,
