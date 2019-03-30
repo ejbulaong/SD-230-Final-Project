@@ -38,6 +38,9 @@ namespace PokerHandsEvaluator
                     Cards.Add(newCard);
                 }
             }
+
+            var joker = new Card("JOKER");
+            Cards.Add(joker);
         }
     }
 }

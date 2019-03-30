@@ -15,26 +15,27 @@ namespace PokerHandsEvaluator
         public Card(string cardName)
         {
             CardName = cardName;
-            CardClass = getClassValue();
-            CardValue = getCardValue();
+            CardClass = GetClassValue();
+            CardValue = GetCardValue();
         }
 
-        private CardClass getClassValue()
+        private CardClass GetClassValue()
         {
-            var firstChar = CardName.Substring(1, 1);
-            if (firstChar == "C")
+            var lastChar = CardName.Substring(CardName.Length-1, 1).ToUpper();
+
+            if (lastChar == "C")
             {
                 return CardClass.Club;
             }
-            else if (firstChar == "S")
+            else if (lastChar == "S")
             {
                 return CardClass.Spade;
             }
-            else if (firstChar == "H")
+            else if (lastChar == "H")
             {
                 return CardClass.Heart;
             }
-            else if (firstChar == "D")
+            else if (lastChar == "D")
             {
                 return CardClass.Diamond;
             }
@@ -44,17 +45,17 @@ namespace PokerHandsEvaluator
             }
         }
 
-        private int getCardValue()
+        private int GetCardValue()
         {
-            var firstChar = CardName.Substring(1, 1);
+            var firstChar = CardName.Substring(0, 1).ToUpper();
             var cardValues = new List<int>() { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
             var cardFirstNames = new List<string>() { "A", "K", "Q", "J", "9", "8", "7", "6", "5", "4", "3", "2" };
 
             var cardValue = (from f in cardFirstNames
-                             where f == CardName.Substring(1, 1)
+                             where f == firstChar
                              select f).FirstOrDefault();
 
-            return cardFirstNames.IndexOf(cardValue);           
+            return cardValues[cardFirstNames.IndexOf(cardValue)];           
         }
     }
 }

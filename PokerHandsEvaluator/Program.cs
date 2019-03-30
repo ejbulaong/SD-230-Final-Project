@@ -36,15 +36,22 @@ namespace PokerHandsEvaluator
 
         private static void Evaluate(Deck deck)
         {
-            foreach(var hand in deck.Hands)
+            if(deck.Hands.Count < 1)
             {
-                var screenOutput = $"{hand.PlayerName} ";
-                foreach (var card in hand.Cards)
-                {
-                    screenOutput += card.CardName + " ";
-                }
-                Console.WriteLine(screenOutput + " " + hand.Rank);
+                Console.WriteLine("Sorry. No hand/s to evaluate!");
             }
+            else
+            {
+                foreach (var hand in deck.Hands)
+                {
+                    var screenOutput = $"{hand.PlayerName} ";
+                    foreach (var card in hand.Cards)
+                    {
+                        screenOutput += card.CardName + " ";
+                    }
+                    Console.WriteLine(screenOutput + " " + hand.Rank.Name);
+                }
+            }            
         }
 
         private static void AddHand(Deck deck)
@@ -52,7 +59,6 @@ namespace PokerHandsEvaluator
             var playerName = "";
             var allowedHand = new List<string>();
             var newHand = new Hand();
-
             foreach (var card in deck.Cards)
             {
                 allowedHand.Add(card.CardName);
@@ -70,15 +76,14 @@ namespace PokerHandsEvaluator
                 cardInput = Console.ReadLine();
                 Console.WriteLine();
 
-                if (x == 4 && cardInput == newHand.Cards[3].CardName &&
-                    ((newHand.Cards[0].CardName == newHand.Cards[1].CardName) &&
-                    (newHand.Cards[1].CardName == newHand.Cards[2].CardName) &&
-                    (newHand.Cards[2].CardName == newHand.Cards[3].CardName)))
+                if (x == 4 && cardInput.ToLower() == newHand.Cards[3].CardName.ToLower() &&
+                    ((newHand.Cards[0].CardName.ToLower() == newHand.Cards[1].CardName.ToLower()) &&
+                    (newHand.Cards[1].CardName.ToLower() == newHand.Cards[2].CardName.ToLower()) &&
+                    (newHand.Cards[2].CardName.ToLower() == newHand.Cards[3].CardName.ToLower())))
                 {
 
                     Console.WriteLine("Cannot have five similar cards.");
                     --x;
-
                 }
                 else if (allowedHand.Contains(cardInput.ToUpper()))
                 {
@@ -87,13 +92,12 @@ namespace PokerHandsEvaluator
                 }
                 else
                 {
-
-
                     Console.WriteLine("Sorry. Not a valid card.");
                     --x;
                 }
             }
             Console.WriteLine("Player's hand successfully saved!");
+            newHand.GetRank();
             deck.Hands.Add(newHand);
         }
     }

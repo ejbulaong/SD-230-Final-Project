@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PokerHandsEvaluator
 {
-    public enum Rank
+    public enum Ranks
     {
         FiveOfAKind,
         StraightFlush,
