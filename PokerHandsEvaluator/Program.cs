@@ -63,10 +63,10 @@ namespace PokerHandsEvaluator
 
                 foreach (var hand in winningHands)
                 {
-                    Console.WriteLine(hand.PlayerName + " "+ hand.Rank.Name);
+                    Console.WriteLine(hand.PlayerName + " " + hand.Rank.Name);
                 }
 
-            }            
+            }
         }
 
         private static void AddHand(Deck deck)
@@ -83,29 +83,25 @@ namespace PokerHandsEvaluator
             playerName = Console.ReadLine();
             newHand.PlayerName = playerName;
             Console.WriteLine();
-            var cardsFirstChar = new List<string>();
+            var checkDuplicates = new List<string>();
 
             for (var x = 0; x < 5; x++)
             {
                 var cardInput = "";
                 Console.Write($"Please enter card{x + 1}: ");
                 cardInput = Console.ReadLine();
-                Console.WriteLine();  
+                Console.WriteLine();
 
-                if (x == 4 && cardInput.Substring(0,1).ToLower() == cardsFirstChar[3].ToLower() &&
-                    ((cardsFirstChar[0].ToLower() == cardsFirstChar[1].ToLower()) &&
-                    (cardsFirstChar[0].ToLower() == cardsFirstChar[2].ToLower()) &&
-                    (cardsFirstChar[2].ToLower() == cardsFirstChar[3].ToLower())))
+                if (checkDuplicates.Contains(cardInput.ToLower()))
                 {
-
-                    Console.WriteLine("Cannot have five similar cards.");
+                    Console.WriteLine("Cannot repeat that card.");
                     --x;
                 }
                 else if (allowedHand.Contains(cardInput.ToUpper()))
                 {
                     var newCard = new Card(cardInput);
                     newHand.Cards.Add(newCard);
-                    cardsFirstChar.Add(newCard.CardName.Substring(0,1));
+                    checkDuplicates.Add(newCard.CardName.ToLower());
                 }
                 else
                 {
