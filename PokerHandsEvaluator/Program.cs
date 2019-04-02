@@ -48,10 +48,10 @@ namespace PokerHandsEvaluator
                     var screenOutput = $"{hand.PlayerName} ";
                     foreach (var card in hand.Cards)
                     {
-                        screenOutput += card.CardName + " ";
+                        screenOutput += card.CardName + " " ;
                     }
                     handValues.Add(hand.Rank.Value);
-                    Console.WriteLine(screenOutput);
+                    Console.WriteLine(screenOutput + hand.Rank.Name);
                 }
 
                 var winningHandValue = handValues.Max();
