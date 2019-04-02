@@ -83,18 +83,19 @@ namespace PokerHandsEvaluator
             playerName = Console.ReadLine();
             newHand.PlayerName = playerName;
             Console.WriteLine();
+            var cardsFirstChar = new List<string>();
 
             for (var x = 0; x < 5; x++)
             {
                 var cardInput = "";
                 Console.Write($"Please enter card{x + 1}: ");
                 cardInput = Console.ReadLine();
-                Console.WriteLine();
+                Console.WriteLine();  
 
-                if (x == 4 && cardInput.ToLower() == newHand.Cards[3].CardName.ToLower() &&
-                    ((newHand.Cards[0].CardName.ToLower() == newHand.Cards[1].CardName.ToLower()) &&
-                    (newHand.Cards[1].CardName.ToLower() == newHand.Cards[2].CardName.ToLower()) &&
-                    (newHand.Cards[2].CardName.ToLower() == newHand.Cards[3].CardName.ToLower())))
+                if (x == 4 && cardInput.Substring(0,1).ToLower() == cardsFirstChar[3].ToLower() &&
+                    ((cardsFirstChar[0].ToLower() == cardsFirstChar[1].ToLower()) &&
+                    (cardsFirstChar[0].ToLower() == cardsFirstChar[2].ToLower()) &&
+                    (cardsFirstChar[2].ToLower() == cardsFirstChar[3].ToLower())))
                 {
 
                     Console.WriteLine("Cannot have five similar cards.");
@@ -104,6 +105,7 @@ namespace PokerHandsEvaluator
                 {
                     var newCard = new Card(cardInput);
                     newHand.Cards.Add(newCard);
+                    cardsFirstChar.Add(newCard.CardName.Substring(0,1));
                 }
                 else
                 {
